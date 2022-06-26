@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class Camera11 : MonoBehaviour
 {
+    [SerializeField] Transform arroeset;
     [SerializeField] Transform watchtarget;
     [SerializeField] Transform neck;
     [SerializeField] Transform move;
@@ -13,9 +14,15 @@ public class Camera11 : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera camera2;
     [SerializeField] CinemachineVirtualCamera camera3;
     [SerializeField] CinemachineVirtualCamera camera4;
+    [SerializeField] AudioListener main;
+    [SerializeField] AudioListener sub;
+    [SerializeField] GameObject arrow;
     bool oncamera = false;
-    private float eye=0;
+    const double MIN = -40;
+    const double MAX = 40;
     [SerializeField] Transform eyes;
+    double i;
+    double power = 0;
 
     public void Start()
     {
@@ -23,19 +30,42 @@ public class Camera11 : MonoBehaviour
         camera2.Priority = 11;
         camera3.Priority = 11;
         camera4.Priority = 10;
+        main.enabled = false;
+        sub.enabled = true;
     }
     protected virtual void LateUpdate()
     {
+        //ƒJƒƒ‰‚ÌˆÚ“®‚É‡‚í‚¹‚ÄŽñ‚à‰ñ“]
         Vector3 necklotate = new Vector3( 0,0, watchtarget.rotation.x);
-        Debug.Log(necklotate);
         neck.Rotate(necklotate*-180);
     }
     public void Update()
     {
+        //ƒJƒƒ‰‚Ì‰ñ“]‚ÆÅ‘å’l‚ÌÝ’è
+        double h = Input.GetAxis("TurnHorizontal")*.05;
+        i += h;
+        i = Math.Min(i, MAX);
+        i = Math.Max(i, MIN);
+        if (i == MAX && h > 0)
+        {
+            h = 0;
+        }
+        if (i == MIN && h < 0)
+        {
+            h = 0;
+        }
+        eyes.transform.Rotate(new Vector3((float)h, 0, 0));
+        if(Input.GetButton("Arrowinstantiate"))
+        {
+            power += 1f;
+        }
+        if (Input.GetButtonUp("Arrowinstantiate")) 
+        {
+
+        }
+        Debug.Log(power);
         if (Input.anyKeyDown) 
         {
-            float h = Input.GetAxis("TurnHorizontal");
-            eyes.transform.Rotate(new Vector3(h, 0, 0));
             foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(code))
@@ -49,6 +79,8 @@ public class Camera11 : MonoBehaviour
                             camera2.Priority = 11;
                             camera3.Priority = 11;
                             camera4.Priority = 10;
+                            main.enabled = false;
+                            sub.enabled = true;
                         }
                         else
                         {
@@ -57,6 +89,8 @@ public class Camera11 : MonoBehaviour
                             camera2.Priority = 10;
                             camera3.Priority = 10;
                             camera4.Priority = 11;
+                            main.enabled = true;
+                            sub.enabled = false;
                         }
                     }
                 }

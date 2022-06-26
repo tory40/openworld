@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c06fde19294944498516b17285423c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arroeset: {fileID: 1757983526}
   watchtarget: {fileID: 747534081}
   neck: {fileID: 1230913547}
   move: {fileID: 306084515}
@@ -276,6 +277,9 @@ MonoBehaviour:
   camera2: {fileID: 548479547}
   camera3: {fileID: 962413356}
   camera4: {fileID: 362118029}
+  main: {fileID: 963194226}
+  sub: {fileID: 2035942933}
+  arrow: {fileID: 0}
   eyes: {fileID: 747534081}
 --- !u!1 &362118028
 GameObject:
@@ -1461,7 +1465,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035942931}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &2035942934
 Camera:
   m_ObjectHideFlags: 0
