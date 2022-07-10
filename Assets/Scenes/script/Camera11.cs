@@ -7,6 +7,7 @@ using Cinemachine;
 public class Camera11 : MonoBehaviour
 {
     [SerializeField] Transform arroeset;
+    [SerializeField] Transform arrowset;
     [SerializeField] Transform watchtarget;
     [SerializeField] Transform neck;
     [SerializeField] Transform move;
@@ -16,13 +17,14 @@ public class Camera11 : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera camera4;
     [SerializeField] AudioListener main;
     [SerializeField] AudioListener sub;
-    [SerializeField] GameObject arrow;
+    [SerializeField] Arrow arrow;
     bool oncamera = false;
     const double MIN = -40;
     const double MAX = 40;
     [SerializeField] Transform eyes;
     double i;
-    double power = 0;
+    int power = 1000;
+    Arrow arrowObj;
 
     public void Start()
     {
@@ -55,13 +57,18 @@ public class Camera11 : MonoBehaviour
             h = 0;
         }
         eyes.transform.Rotate(new Vector3((float)h, 0, 0));
-        if(Input.GetButton("Arrowinstantiate"))
+        if (Input.GetButtonDown("Arrowinstantiate")) 
         {
-            power += 1f;
+            arrowObj = Instantiate(arrow, arrowset.transform.position+Vector3.forward*3, arrowset.transform.rotation);
         }
-        if (Input.GetButtonUp("Arrowinstantiate")) 
+        if (Input.GetButton("Arrowinstantiate"))
         {
-
+            power += 5;
+        }
+        if (Input.GetButtonUp("Arrowinstantiate"))
+        {
+            arrowObj.Shot(power);
+            power = 1000;
         }
         Debug.Log(power);
         if (Input.anyKeyDown) 
