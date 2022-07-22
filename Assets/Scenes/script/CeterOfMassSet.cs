@@ -10,7 +10,7 @@ public class CeterOfMassSet : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        com = 30f * transform.forward;
+        com = -30f * transform.forward;
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = com;
     }

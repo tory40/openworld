@@ -59,7 +59,7 @@ public class Camera11 : MonoBehaviour
         eyes.transform.Rotate(new Vector3((float)h, 0, 0));
         if (Input.GetButtonDown("Arrowinstantiate")) 
         {
-            arrowObj = Instantiate(arrow, arrowset.transform.position+Vector3.forward*3, arrowset.transform.rotation);
+            arrowObj = Instantiate(arrow, arroeset.transform.position, arrowset.transform.rotation);
         }
         if (Input.GetButton("Arrowinstantiate"))
         {
@@ -104,5 +104,4 @@ public class Camera11 : MonoBehaviour
             }
         }
     }
-      
 }
