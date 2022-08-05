@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
     Rigidbody rb;
     Rigidbody[] rbs;
+    [SerializeField] 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -13,12 +14,12 @@ public class Arrow : MonoBehaviour
     }
     public void Shot(int power) 
     {
-        foreach(var rigi in rbs)
+        Destroy(gameObject, 5.0f);
+        foreach (var rigi in rbs)
         {
             rigi.useGravity = true;
         }
         rb.useGravity = true;
-        power = Mathf.Clamp(1000, power, 5000);
         rb.AddForce(transform.up * power);
     }
 }
